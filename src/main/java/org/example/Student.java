@@ -5,7 +5,7 @@ public class Student {
     final double averageGrade;
     final int recordBookNumber;
 
-    public Student(String name, double averageGrade, int recordBookNumber) {
+    public Student(final String name, final double averageGrade, final int recordBookNumber) {
         this.name = name;
         this.averageGrade = averageGrade;
         this.recordBookNumber = recordBookNumber;
@@ -41,7 +41,7 @@ public class Student {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         Student student = (Student) obj;
         return name.equals(student.name) && averageGrade == student.averageGrade && recordBookNumber == student.recordBookNumber;
     }

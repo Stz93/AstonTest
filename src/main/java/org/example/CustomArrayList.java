@@ -13,7 +13,7 @@ public class CustomArrayList<E> extends AbstractList<E> {
         elements = new Object[DEFAULT_CAPACITY];
     }
 
-    public CustomArrayList(int capacity) {
+    public CustomArrayList(final int capacity) {
         elements = new Object[capacity];
     }
 
@@ -23,7 +23,7 @@ public class CustomArrayList<E> extends AbstractList<E> {
     }
 
     @Override
-    public E get(int index) {
+    public E get(final int index) {
         if (index >= size || index < 0) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + index);
         }
@@ -31,7 +31,7 @@ public class CustomArrayList<E> extends AbstractList<E> {
     }
 
     @Override
-    public boolean add(E e) {
+    public boolean add(final E e) {
         if (size == elements.length) {
             elements = Arrays.copyOf(elements, size * 2);
         }
@@ -40,7 +40,7 @@ public class CustomArrayList<E> extends AbstractList<E> {
     }
 
     @Override
-    public void add(int index, E element) {
+    public void add(final int index, final E element) {
         if (index > size || index < 0) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + index);
         }
@@ -55,7 +55,7 @@ public class CustomArrayList<E> extends AbstractList<E> {
     }
 
     @Override
-    public E remove(int index) {
+    public E remove(final int index) {
         if (index >= size || index < 0) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + index);
         }
