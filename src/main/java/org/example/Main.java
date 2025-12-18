@@ -102,10 +102,10 @@ public class Main {
     static void input(final String inputCode, List<Student> studentList) {
         // реализовать паттерн "Стратегия" по введённому коду стратегии, добавить валидацию этого кода.
         Student.Builder builder = new Student.Builder();
-        studentList.add(builder.name("Sasha").averageGrade(97).recordBookNumber(100101).build());
-        studentList.add(builder.name("Bogdan").averageGrade(99).recordBookNumber(888888).build());
-        studentList.add(builder.name("Kirill").averageGrade(100).recordBookNumber(414141).build());
-        studentList.add(builder.name("Tagir").averageGrade(98).recordBookNumber(366663).build());
+        studentList.add(builder.name("Sasha").averageGrade(0.97).recordBookNumber(100101).build());
+        studentList.add(builder.name("Bogdan").averageGrade(0.99).recordBookNumber(888888).build());
+        studentList.add(builder.name("Kirill").averageGrade(1.00).recordBookNumber(414141).build());
+        studentList.add(builder.name("Tagir").averageGrade(0.98).recordBookNumber(366663).build());
     }
 
     /**
