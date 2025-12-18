@@ -32,7 +32,9 @@ public class Main {
      * @param scanner требуется передать {@link Scanner} читающий из консоли.
      * @throws IllegalStateException выбрасываем исключения для некорректных вводов в консоль.
      */
-    public static void processRequest(Scanner scanner, List<Student> studentList) throws IllegalStateException {
+    public static void processRequest(
+            final Scanner scanner,
+            final List<Student> studentList) throws IllegalStateException {
         System.out.println("MENU :\t1 to input");
         System.out.println("\t\t2 to output");
         System.out.println("\t\t3 to sort");
@@ -99,7 +101,7 @@ public class Main {
      *
      * @param inputCode код стратегии ввода.
      */
-    static void input(final String inputCode, List<Student> studentList) {
+    static void input(final String inputCode, final List<Student> studentList) {
         // реализовать паттерн "Стратегия" по введённому коду стратегии, добавить валидацию этого кода.
         Student.Builder builder = new Student.Builder();
         studentList.add(builder.name("Sasha").averageGrade(0.97).recordBookNumber(100101).build());
