@@ -43,6 +43,11 @@ public class Student {
     @Override
     public boolean equals(Object obj) {
         Student student = (Student) obj;
-        return name.equals(student.name) &&  averageGrade == student.averageGrade && recordBookNumber == student.recordBookNumber;
+        return name.equals(student.name) && averageGrade == student.averageGrade && recordBookNumber == student.recordBookNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "\t name : " + name + " \taverageGrade : " + averageGrade + " \trecordBookNumber : " + recordBookNumber;
     }
 }

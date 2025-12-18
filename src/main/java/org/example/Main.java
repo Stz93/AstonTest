@@ -1,11 +1,9 @@
 package org.example;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    // всё ли ок с моей веткой?
     /**
      * Количество потоков выделенное для многопоточных операций
      */
@@ -16,12 +14,12 @@ public class Main {
     static boolean flag = true;
 
     public static void main(String[] args) {
-        List<Student> studentList = new LinkedList<>();
+        List<Student> studentList = new CustomArrayList<>();
         Scanner scanner = new Scanner(System.in);
 
         while (flag) {
             try {
-                processRequest(scanner);
+                processRequest(scanner, studentList);
             } catch (final IllegalStateException e) {
                 System.out.println(e);
             }
@@ -34,7 +32,7 @@ public class Main {
      * @param scanner требуется передать {@link Scanner} читающий из консоли.
      * @throws IllegalStateException выбрасываем исключения для некорректных вводов в консоль.
      */
-    public static void processRequest(Scanner scanner) throws IllegalStateException {
+    public static void processRequest(Scanner scanner, List<Student> studentList) throws IllegalStateException {
         System.out.println("MENU :\t1 to input");
         System.out.println("\t\t2 to output");
         System.out.println("\t\t3 to sort");
@@ -54,13 +52,13 @@ public class Main {
                 System.out.println("\t\t4 back");
 
                 String inputCode = scanner.next();
-                input(inputCode);
-                processRequest(scanner);
+                input(inputCode, studentList);
+                processRequest(scanner, studentList);
                 return;
             case "2":
                 System.out.println("You have chosen to write data in file : *File directory*");
                 write();
-                processRequest(scanner);
+                processRequest(scanner, studentList);
                 return;
             case "3":
                 System.out.println("You have chosen to sort");
@@ -72,8 +70,8 @@ public class Main {
                 System.out.println("\t\t5 back");
 
                 String sortCode = scanner.next();
-                sort(sortCode);
-                processRequest(scanner);
+                sort(sortCode, studentList);
+                processRequest(scanner, studentList);
                 return;
             case "4":
                 System.out.println("You have chosen to count entries. Please choose entry.");
@@ -85,7 +83,7 @@ public class Main {
                 String recordBookNumber = scanner.next();
 
                 count(name, averageGrade, recordBookNumber, THREAD_NUMBER);
-                processRequest(scanner);
+                processRequest(scanner, studentList);
                 return;
             case "0":
                 System.out.println("exit");
@@ -101,9 +99,12 @@ public class Main {
      *
      * @param inputCode код стратегии ввода.
      */
-    static void input(final String inputCode) {
+    static void input(final String inputCode, List<Student> studentList) {
         // реализовать паттерн "Стратегия" по введённому коду стратегии, добавить валидацию этого кода.
-        System.out.println("массив введён : " + inputCode);
+        studentList.add(new Student("Sasha", 97, 100101));
+        studentList.add(new Student("Bogdan", 99, 888888));
+        studentList.add(new Student("Kirill", 100, 414141));
+        studentList.add(new Student("Tagir", 98, 366663));
     }
 
     /**
@@ -132,8 +133,9 @@ public class Main {
      *
      * @param sortCode
      */
-    static void sort(final String sortCode) {
+    static void sort(final String sortCode, final List<Student> studentList) {
         // реализовать 4 режима режима. По каждому из полей + сортировка только чётных зачётных книжек.
         System.out.println("массив отсортирован : " + sortCode);
+        studentList.stream().sorted((a, b) -> a.name.compareTo(b.name)).forEach(System.out::println);
     }
 }
