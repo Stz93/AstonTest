@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+    // всё ли ок с моей веткой?
     /**
      * Количество потоков выделенное для многопоточных операций
      */
