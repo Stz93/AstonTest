@@ -93,7 +93,7 @@ public class Main {
                 return;
         }
 
-        throw new IllegalStateException("Wrong action code. Choose 1-3 or 0.");
+        throw new IllegalStateException("Wrong action code. Choose 1-4 or 0.");
     }
 
     /**
