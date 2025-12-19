@@ -1,6 +1,9 @@
 package org.example;
 
-public class StrategyFactory {
+import java.util.List;
+
+public class StrategyFactory  {
+
     //фабрика стратегий
 //
 }
