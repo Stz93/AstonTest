@@ -36,7 +36,7 @@ class StudentTest {
         Student student1 = new Student("testName", 0.97, 012345);
 
         // Средний балл
-        Student student2 = new Student("testName", 0.97, 012345);
+        Student student2 = new Student("testName", 0.79, 012345);
         Assertions.assertNotEquals(student1, student2);
     }
 
