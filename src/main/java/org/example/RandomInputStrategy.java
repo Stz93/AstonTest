@@ -48,4 +48,3 @@ public class RandomInputStrategy implements InputStrategy {
                 .build();
     }
 }
-//если тут напишу то можно будет кинуть снова

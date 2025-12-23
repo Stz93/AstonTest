@@ -36,7 +36,6 @@ public class FileInputStrategy implements InputStrategy {
             double averageGrade = Double.parseDouble(parts[1].trim());
             int recordBookNumber = Integer.parseInt(parts[2].trim());
 
-            //попозже добавить валидацию, что имя не пустое и с остальным придумать
 
             return new Student.Builder()
                     .name(name)
@@ -45,4 +44,3 @@ public class FileInputStrategy implements InputStrategy {
                     .build();
     }
 }
-//если тут напишу то можно будет кинуть снова

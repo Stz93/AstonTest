@@ -102,14 +102,24 @@ public class Main {
      * @param inputCode код стратегии ввода.
      */
     static void input(final String inputCode, final List<Student> studentList) {
-        // реализовать паттерн "Стратегия" по введённому коду стратегии, добавить валидацию этого кода.
-        Student.Builder builder = new Student.Builder();
+
+        try{
+            InputStrategy strategy = InputStrategyFactory.create(inputCode);
+            CustomArrayList<Student> newStudents = strategy.loadData();
+            studentList.addAll(newStudents);
+            System.out.println("Successfully added " + newStudents.size() + " students");
+            System.out.println("Total students in collection: " + studentList.size());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        } catch (DataLoadingException | ValidationException e) {
+            System.out.println("Data loading error: " + e.getMessage());
+        }
+    }  // реализовать паттерн "Стратегия" по введённому коду стратегии, добавить валидацию этого кода.
+    /*   Student.Builder builder = new Student.Builder();
         studentList.add(builder.name("Sasha").averageGrade(0.97).recordBookNumber(100101).build());
         studentList.add(builder.name("Bogdan").averageGrade(0.99).recordBookNumber(888888).build());
         studentList.add(builder.name("Kirill").averageGrade(1.00).recordBookNumber(414141).build());
-        studentList.add(builder.name("Tagir").averageGrade(0.98).recordBookNumber(366663).build());
-    }
-
+        studentList.add(builder.name("Tagir").averageGrade(0.98).recordBookNumber(366663).build());*/
     /**
      * Обработчик для записи данных из коллекции в файл.
      */
