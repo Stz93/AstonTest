@@ -147,7 +147,18 @@ public class Main {
      */
     static void sort(final String sortCode, final List<Student> studentList) {
         // реализовать 4 режима режима. По каждому из полей + сортировка только чётных зачётных книжек.
+        var context = new SortingContext<Student>(getStrategyBySortCode(sortCode));
+        context.sort(studentList);
         System.out.println("массив отсортирован : " + sortCode);
         studentList.stream().sorted((a, b) -> a.name.compareTo(b.name)).forEach(System.out::println);
+    }
+
+    static SortStrategy<Student> getStrategyBySortCode(String sortCode) {
+        return switch (sortCode) {
+            case "1" -> new StudentQuickSortByName();
+            case "2" -> new StudentQuickSortByAverageGrade();
+            case "3" -> new StudentQuickSortByRecordBookNumber();
+            default -> new AdditionalStudentQuickSortByRecordBookNumber();
+        };
     }
 }
