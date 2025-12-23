@@ -1,5 +1,7 @@
 package org.example;
 
+import java.sql.Array;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -32,10 +34,9 @@ public class Main {
      * @param scanner требуется передать {@link Scanner} читающий из консоли.
      * @throws IllegalStateException выбрасываем исключения для некорректных вводов в консоль.
      */
-    public static void processRequest(
-            final Scanner scanner,
-            final List<Student> studentList) throws IllegalStateException {
-        System.out.println("MENU :\t1 to input");
+    public static void processRequest(final Scanner scanner,
+                                      final List<Student> studentList) throws IllegalStateException {
+        System.out.println("\n\nMENU :\t1 to input");
         System.out.println("\t\t2 to output");
         System.out.println("\t\t3 to sort");
         System.out.println("\t\t4 to count entries");
@@ -46,7 +47,7 @@ public class Main {
 
         switch (actionCode) {
             case "1":
-                System.out.println("You have chosen to input");
+                System.out.println("\n\nYou have chosen to input");
                 System.out.println("Which input method should be selected?");
                 System.out.println("\t\t1 from File : " + "*File directory*");
                 System.out.println("\t\t2 random");
@@ -58,12 +59,12 @@ public class Main {
                 processRequest(scanner, studentList);
                 return;
             case "2":
-                System.out.println("You have chosen to write data in file : *File directory*");
+                System.out.println("\n\nYou have chosen to write data in file : *File directory*");
                 write();
                 processRequest(scanner, studentList);
                 return;
             case "3":
-                System.out.println("You have chosen to sort");
+                System.out.println("\n\nYou have chosen to sort");
                 System.out.println("Which field should be selected for sorting?");
                 System.out.println("\t\t1 name");
                 System.out.println("\t\t2 averageGrade");
@@ -76,7 +77,7 @@ public class Main {
                 processRequest(scanner, studentList);
                 return;
             case "4":
-                System.out.println("You have chosen to count entries. Please choose entry.");
+                System.out.println("\n\nYou have chosen to count entries. Please choose entry.");
                 System.out.println("\t\tname : ");
                 String name = scanner.next();
                 System.out.println("\t\taverageGrade : ");
@@ -88,7 +89,7 @@ public class Main {
                 processRequest(scanner, studentList);
                 return;
             case "0":
-                System.out.println("exit");
+                System.out.println("\n\nexit");
                 flag = false;
                 return;
         }
@@ -104,10 +105,15 @@ public class Main {
     static void input(final String inputCode, final List<Student> studentList) {
         // реализовать паттерн "Стратегия" по введённому коду стратегии, добавить валидацию этого кода.
         Student.Builder builder = new Student.Builder();
-        studentList.add(builder.name("Sasha").averageGrade(0.97).recordBookNumber(100101).build());
-        studentList.add(builder.name("Bogdan").averageGrade(0.99).recordBookNumber(888888).build());
-        studentList.add(builder.name("Kirill").averageGrade(1.00).recordBookNumber(414141).build());
-        studentList.add(builder.name("Tagir").averageGrade(0.98).recordBookNumber(366663).build());
+
+        Student[] studentArray = new Student[4];
+        studentArray[0] = builder.name("Sasha").averageGrade(0.97).recordBookNumber(100101).build();
+        studentArray[1] = builder.name("Bogdan").averageGrade(0.99).recordBookNumber(888888).build();
+        studentArray[2] = builder.name("Kirill").averageGrade(1.00).recordBookNumber(414141).build();
+        studentArray[3] = builder.name("Tagir").averageGrade(0.98).recordBookNumber(366663).build();
+
+        // Пример заполнения коллекции из стрима:
+        Arrays.stream(studentArray).forEach(studentList::add);
     }
 
     /**
@@ -126,7 +132,10 @@ public class Main {
      * @param recordBookNumber {@link Student#recordBookNumber} для поиска
      * @param threadNumber     выделенное количество потоков
      */
-    static void count(final String name, final String averageGrade, final String recordBookNumber, final int threadNumber) {
+    static void count(final String name,
+                      final String averageGrade,
+                      final String recordBookNumber,
+                      final int threadNumber) {
         // реализовать счётчик
         System.out.println("Посчитан элемент : " + name + ", " + averageGrade + ", " + recordBookNumber);
     }
@@ -134,11 +143,22 @@ public class Main {
     /**
      * Обработчик для сортировки коллекции студентов.
      *
-     * @param sortCode
+     * @param sortCode Код стратегии по которой будет проводиться сортировка.
      */
     static void sort(final String sortCode, final List<Student> studentList) {
         // реализовать 4 режима режима. По каждому из полей + сортировка только чётных зачётных книжек.
+        var context = new SortingContext<Student>(getStrategyBySortCode(sortCode));
+        context.sort(studentList);
         System.out.println("массив отсортирован : " + sortCode);
         studentList.stream().sorted((a, b) -> a.name.compareTo(b.name)).forEach(System.out::println);
+    }
+
+    static SortStrategy<Student> getStrategyBySortCode(String sortCode) {
+        return switch (sortCode) {
+            case "1" -> new StudentQuickSortByName();
+            case "2" -> new StudentQuickSortByAverageGrade();
+            case "3" -> new StudentQuickSortByRecordBookNumber();
+            default -> new AdditionalStudentQuickSortByRecordBookNumber();
+        };
     }
 }
