@@ -5,37 +5,38 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ManualInputStrategy implements InputStrategy{
-    Scanner scanner = new Scanner(System.in);
-    @Override
-    public CustomArrayList<Student> loadData() throws DataLoadingException, ValidationException {
-        System.out.println("Введите количество вводимых сутдентов: ");
+    Scanner scannerManualInput = new Scanner(System.in);
+    private final int countManual;
 
-        int quantity = scanner.nextInt();
-        if (quantity <= 0){
-            throw new ValidationException("Введите положительное количество студентов");
+    public ManualInputStrategy(int countManual){
+        if(countManual < 0){
+            throw new IllegalArgumentException("The count must be greater than zero");
         }
-        scanner.nextLine();
+        this.countManual = countManual;
+    }
+    @Override
+    public CustomArrayList<Student> loadData()  {
         return Stream.generate(()-> createStudent())
-                .limit(quantity)
+                .limit(countManual)
                 .collect(Collectors.toCollection(CustomArrayList::new));
-        //перепроверить этот стримак после того как буду создавать ввод в файл, хз чето с интернета взял пока пусть так будет
+
     }
 
-    private Student createStudent() // throws DataLoadingException, ValidationException - хотел сделать валидацию на ввод, но стримаку не нравится когда я вношу эти штуки сюда
+    private Student createStudent()
     {
-        System.out.println("Ввод нового студента");
-        System.out.println("Имя: ");
-        String name = scanner.nextLine();
+        System.out.println("Adding a new student");
+        System.out.println("Name: ");
+        String name = scannerManualInput.nextLine();
 
-        System.out.println("Средний балл: ");
-        double averageGrade = scanner.nextDouble();
+        System.out.println("Average grade: ");
+        double averageGrade = scannerManualInput.nextDouble();
 
-        scanner.nextLine();
+        scannerManualInput.nextLine();
 
-        System.out.println("Введите номер зачетки: ");
-        int recordBookNumber = scanner.nextInt();
+        System.out.println("Number of record book: ");
+        int recordBookNumber = scannerManualInput.nextInt();
 
-        scanner.nextLine();
+        scannerManualInput.nextLine();
 
         return new Student.Builder()
                 .name(name)
