@@ -43,7 +43,7 @@ public class Student {
     @Override
     public boolean equals(final Object obj) {
         Student student = (Student) obj;
-        return name.equals(student.name) && averageGrade == student.averageGrade && recordBookNumber == student.recordBookNumber;
+        return name.equals(student.name) && Math.abs(averageGrade - student.averageGrade) < 0.001 && recordBookNumber == student.recordBookNumber;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package org.example;
 
-import java.sql.Array;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -149,8 +148,6 @@ public class Main {
         // реализовать 4 режима режима. По каждому из полей + сортировка только чётных зачётных книжек.
         var context = new SortingContext<Student>(getStrategyBySortCode(sortCode));
         context.sort(studentList);
-        System.out.println("массив отсортирован : " + sortCode);
-        studentList.stream().sorted((a, b) -> a.name.compareTo(b.name)).forEach(System.out::println);
     }
 
     static SortStrategy<Student> getStrategyBySortCode(String sortCode) {

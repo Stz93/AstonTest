@@ -40,6 +40,12 @@ public class CustomArrayList<E> extends AbstractList<E> {
     }
 
     @Override
+    public E set(int index, E element) {
+        elements[index] = element;
+        return element;
+    }
+
+    @Override
     public void add(final int index, final E element) {
         if (index > size || index < 0) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + index);
@@ -65,5 +71,9 @@ public class CustomArrayList<E> extends AbstractList<E> {
         }
         size--;
         return (E) item;
+    }
+
+    public void print() {
+        Arrays.stream(elements).forEach(System.out::println);
     }
 }
