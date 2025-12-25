@@ -39,6 +39,7 @@ public class Main {
         System.out.println("\t\t2 to output");
         System.out.println("\t\t3 to sort");
         System.out.println("\t\t4 to count entries");
+        System.out.println("\t\t5 to see collection");
         System.out.println("\t\t0 to exit");
 
 
@@ -72,20 +73,7 @@ public class Main {
                 System.out.println("\t\t5 back");
 
                 String sortCode = scanner.next();
-                switch (sortCode) {
-                    case "1", "2", "3", "4":
-                        System.out.println("Unsorted list");
-                        studentList.print();
-                        System.out.println("-------------------------");
-                        sort(sortCode, studentList);
-                        System.out.println("Sorted list");
-                        studentList.print();
-                        break;
-                    case "5" :
-                        break;
-                    default:
-                        System.out.println("incorrect input. Choose from 1 to 5");
-                }
+                sort(sortCode, studentList);
 
                 processRequest(scanner, studentList);
                 return;
@@ -159,9 +147,20 @@ public class Main {
      * @param sortCode Код стратегии по которой будет проводиться сортировка.
      */
     static void sort(final String sortCode, final List<Student> studentList) {
+
         // реализовать 4 режима режима. По каждому из полей + сортировка только чётных зачётных книжек.
-        var context = new SortingContext<Student>(getStrategyBySortCode(sortCode));
+        if (!handleSortCode(sortCode)) return;
+
+        var context = new SortingContext<>(getStrategyBySortCode(sortCode));
+
+        System.out.println("Unsorted list");
+        System.out.println(studentList);
+        System.out.println("-------------------------");
+
         context.sort(studentList);
+
+        System.out.println("Sorted list");
+        System.out.println(studentList);
     }
 
     static SortStrategy<Student> getStrategyBySortCode(String sortCode) {
@@ -170,6 +169,17 @@ public class Main {
             case "2" -> new StudentQuickSortByAverageGrade();
             case "3" -> new StudentQuickSortByRecordBookNumber();
             default -> new AdditionalStudentQuickSortByRecordBookNumber();
+        };
+    }
+
+    static boolean handleSortCode(String sortCode) {
+        return switch (sortCode) {
+            case "1", "2", "3", "4" -> true;
+            case "5" -> false;
+            default -> {
+                System.out.println("Incorrect input. Choose from 1 to 5");
+                yield false;
+            }
         };
     }
 }

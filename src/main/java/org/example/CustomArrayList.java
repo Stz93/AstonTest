@@ -74,7 +74,10 @@ public class CustomArrayList<E> extends AbstractList<E> {
         return (E) item;
     }
 
-    public void print() {
-        Arrays.stream(elements).filter(Objects::nonNull).forEach(System.out::println);
+    @Override
+    public String toString() {
+        var builder = new StringBuilder();
+        Arrays.stream(elements).filter(Objects::nonNull).forEach(element -> builder.append(element).append('\n'));
+        return builder.toString().trim();
     }
 }

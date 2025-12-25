@@ -34,10 +34,10 @@ class SortTest {
         System.out.println("-----------------------------");
         CustomArrayList<Student> actualList = new CustomArrayList<>();
         actualList.addAll(notSortedList);
-        actualList.print();
+        System.out.println(actualList);
         System.out.println("-----------------------------");
         Main.sort("1", actualList);
-        actualList.print();
+        System.out.println(actualList);
         System.out.println("-----------------------------");
 
         CustomArrayList<Student> expectedList = new CustomArrayList<>();
