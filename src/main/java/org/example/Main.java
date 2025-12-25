@@ -89,6 +89,9 @@ public class Main {
                 count(name, averageGrade, recordBookNumber, THREAD_NUMBER);
                 processRequest(scanner, studentList);
                 return;
+            case "5" :
+                System.out.println(studentList);
+                return;
             case "0":
                 System.out.println("\n\nexit");
                 flag = false;
