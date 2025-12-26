@@ -20,7 +20,6 @@ public class RandomInputStrategy implements InputStrategy {
         return Stream.generate(() -> createRandomStudent())
                 .limit(countRandom)
                 .collect(Collectors.toCollection(CustomArrayList::new));
-        //перенес ввод количества в фабрику
     }
 
     private String generateRandomName() {

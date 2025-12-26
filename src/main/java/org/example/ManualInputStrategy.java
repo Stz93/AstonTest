@@ -24,19 +24,27 @@ public class ManualInputStrategy implements InputStrategy{
 
     private Student createStudent()
     {
+        double averageGrade;
+        int recordBookNumber;
         System.out.println("Adding a new student");
         System.out.println("Name: ");
         String name = scannerManualInput.nextLine();
 
         System.out.println("Average grade: ");
-        double averageGrade = scannerManualInput.nextDouble();
-
-        scannerManualInput.nextLine();
+        String inputAverageGrade = scannerManualInput.nextLine();
+        try{
+            averageGrade = Double.parseDouble(inputAverageGrade);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         System.out.println("Number of record book: ");
-        int recordBookNumber = scannerManualInput.nextInt();
-
-        scannerManualInput.nextLine();
+        String inputRecordBookNumber = scannerManualInput.nextLine();
+        try {
+            recordBookNumber = Integer.parseInt(inputRecordBookNumber);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException(e);
+        }
 
         return new Student.Builder()
                 .name(name)

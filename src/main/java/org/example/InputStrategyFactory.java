@@ -10,8 +10,8 @@ public class InputStrategyFactory {
         }
         switch (inputCode){
             case "1":
-                System.out.println("Enter file path:");
-                String filePath = scannerForInput.nextLine();
+                System.out.println("You choose file");
+                String filePath = Main.INPUTPATH;
                 return new FileInputStrategy(filePath);
             case "2":
                 System.out.println("Enter quantity:");

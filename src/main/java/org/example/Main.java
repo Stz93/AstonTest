@@ -1,11 +1,11 @@
 package org.example;
 
-import java.sql.Array;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+    final static String INPUTPATH = "C:\\Users\\Tom\\IdeaProjects\\AstonProject\\src\\main\\Input.txt";
+    final static String OUTPUTPATH = "C:\\Users\\Tom\\IdeaProjects\\AstonProject\\src\\main\\Students.txt";
     /**
      * Количество потоков выделенное для многопоточных операций
      */
@@ -49,18 +49,22 @@ public class Main {
             case "1":
                 System.out.println("\n\nYou have chosen to input");
                 System.out.println("Which input method should be selected?");
-                System.out.println("\t\t1 from File : " + "*File directory*");
+                System.out.println("\t\t1 from File : " + INPUTPATH);
                 System.out.println("\t\t2 random");
                 System.out.println("\t\t3 manually");
-                System.out.println("\t\t4 back");
+                //   System.out.println("\t\t4 back");
 
                 String inputCode = scanner.next();
                 input(inputCode, studentList);
                 processRequest(scanner, studentList);
                 return;
             case "2":
-                System.out.println("\n\nYou have chosen to write data in file : *File directory*");
-                write();
+                System.out.println("\n\nYou have chosen to write data in file : " + OUTPUTPATH);
+                System.out.println("Which write method should be selected?");
+                System.out.println("\t\t1 append file");
+                System.out.println("\t\t2 rewrite file");
+                String writeCode = scanner.next();
+                write(writeCode, studentList);
                 processRequest(scanner, studentList);
                 return;
             case "3":
@@ -115,24 +119,55 @@ public class Main {
         } catch (DataLoadingException | ValidationException e) {
             System.out.println("Data loading error: " + e.getMessage());
         }
-     /*   Student.Builder builder = new Student.Builder();
 
-        Student[] studentArray = new Student[4];
-        studentArray[0] = builder.name("Sasha").averageGrade(0.97).recordBookNumber(100101).build();
-        studentArray[1] = builder.name("Bogdan").averageGrade(0.99).recordBookNumber(888888).build();
-        studentArray[2] = builder.name("Kirill").averageGrade(1.00).recordBookNumber(414141).build();
-        studentArray[3] = builder.name("Tagir").averageGrade(0.98).recordBookNumber(366663).build();
-
-        // Пример заполнения коллекции из стрима:
-        Arrays.stream(studentArray).forEach(studentList::add);*/
     }
 
     /**
      * Обработчик для записи данных из коллекции в файл.
      */
-    static void write() {
-        // реализовать паттерн "Стратегия" по введённому коду стратегии, добавить валидацию этого кода.
-        System.out.println("массив записан");
+    static void write(final String writeCode, final List<Student> studentList) {
+
+
+        System.out.println("Writing to file");
+        System.out.println("File: " + OUTPUTPATH);
+
+        if (studentList == null) {
+            System.out.println("Error: student collection is null");
+            return;
+        }
+
+        if (studentList.isEmpty()) {
+            System.out.println("No data to write. Please load students first.");
+            return;
+        }
+
+        try {
+            WriteStrategy strategy = WriteStrategyFactory.create(writeCode);
+
+            CustomArrayList<Student> customList = new CustomArrayList<>();
+            for (Student student : studentList) {
+                if (student != null) {
+                    customList.add(student);
+                }
+            }
+
+            strategy.writeToFile(OUTPUTPATH, customList);
+
+            System.out.println("Success");
+            System.out.println("Students written: " + studentList.size());
+            System.out.println("File: " + OUTPUTPATH);
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+            System.out.println("Available write codes:");
+            System.out.println("  1 - append to file");
+            System.out.println("  2 - rewrite file");
+        } catch (DataLoadingException e) {
+            System.out.println("Error: " + e.getMessage());
+            System.out.println("Check file permissions for " + OUTPUTPATH);
+        }
+
+        System.out.println("Array written");
     }
 
     /**
