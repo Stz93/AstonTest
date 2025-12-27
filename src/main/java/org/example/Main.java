@@ -9,9 +9,9 @@ import java.util.concurrent.*;
 
 public class Main {
 
-    final static String INPUT_PATH = "C:\\Users\\Tom\\IdeaProjects\\AstonProject\\src\\main\\Input.txt";
+    final static String INPUT_PATH = "src/main/Input.txt";
 
-    final static String OUTPUT_PATH = "C:\\Users\\Tom\\IdeaProjects\\AstonProject\\src\\main\\Students.txt";
+    final static String OUTPUT_PATH = "src/main/Students.txt";
     /**
      * Количество потоков выделенное для многопоточных операций
      */
