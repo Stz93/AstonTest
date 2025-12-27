@@ -6,12 +6,12 @@ public class InputStrategyFactory {
     static Scanner scannerForInput = new Scanner(System.in);
     public static InputStrategy create(String inputCode){
         if(!inputCode.matches("[1-4]")){
-            throw new IllegalArgumentException("Number must been from 1 to 4");
+            throw new IllegalArgumentException("Wrong action code. Choose 1-4 or 0");
         }
         switch (inputCode){
             case "1":
                 System.out.println("You choose file");
-                String filePath = Main.INPUTPATH;
+                String filePath = Main.INPUT_PATH;
                 return new FileInputStrategy(filePath);
             case "2":
                 System.out.println("Enter quantity:");

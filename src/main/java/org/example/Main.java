@@ -1,11 +1,14 @@
 package org.example;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    final static String INPUTPATH = "C:\\Users\\Tom\\IdeaProjects\\AstonProject\\src\\main\\Input.txt";
-    final static String OUTPUTPATH = "C:\\Users\\Tom\\IdeaProjects\\AstonProject\\src\\main\\Students.txt";
+
+    final static String INPUT_PATH = "C:\\Users\\Tom\\IdeaProjects\\AstonProject\\src\\main\\Input.txt";
+
+    final static String OUTPUT_PATH = "C:\\Users\\Tom\\IdeaProjects\\AstonProject\\src\\main\\Students.txt";
     /**
      * Количество потоков выделенное для многопоточных операций
      */
@@ -49,17 +52,16 @@ public class Main {
             case "1":
                 System.out.println("\n\nYou have chosen to input");
                 System.out.println("Which input method should be selected?");
-                System.out.println("\t\t1 from File : " + INPUTPATH);
+                System.out.println("\t\t1 from File : " + INPUT_PATH);
                 System.out.println("\t\t2 random");
                 System.out.println("\t\t3 manually");
-                //   System.out.println("\t\t4 back");
 
                 String inputCode = scanner.next();
                 input(inputCode, studentList);
                 processRequest(scanner, studentList);
                 return;
             case "2":
-                System.out.println("\n\nYou have chosen to write data in file : " + OUTPUTPATH);
+                System.out.println("\n\nYou have chosen to write data in file : " + OUTPUT_PATH);
                 System.out.println("Which write method should be selected?");
                 System.out.println("\t\t1 append file");
                 System.out.println("\t\t2 rewrite file");
@@ -116,10 +118,7 @@ public class Main {
             System.out.println("Total students in collection: " + studentList.size());
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
-        } catch (DataLoadingException | ValidationException e) {
-            System.out.println("Data loading error: " + e.getMessage());
         }
-
     }
 
     /**
@@ -129,7 +128,7 @@ public class Main {
 
 
         System.out.println("Writing to file");
-        System.out.println("File: " + OUTPUTPATH);
+        System.out.println("File: " + OUTPUT_PATH);
 
         if (studentList == null) {
             System.out.println("Error: student collection is null");
@@ -151,11 +150,11 @@ public class Main {
                 }
             }
 
-            strategy.writeToFile(OUTPUTPATH, customList);
+            strategy.writeToFile(OUTPUT_PATH, customList);
 
             System.out.println("Success");
             System.out.println("Students written: " + studentList.size());
-            System.out.println("File: " + OUTPUTPATH);
+            System.out.println("File: " + OUTPUT_PATH);
 
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
@@ -164,7 +163,7 @@ public class Main {
             System.out.println("  2 - rewrite file");
         } catch (DataLoadingException e) {
             System.out.println("Error: " + e.getMessage());
-            System.out.println("Check file permissions for " + OUTPUTPATH);
+            System.out.println("Check file permissions for " + OUTPUT_PATH);
         }
 
         System.out.println("Array written");

@@ -21,7 +21,7 @@ public class WriteStrategyFactory {
                 );
         }
     }
-    public static WriteStrategy createDefaultStrategy() {
-        return new AppendWriteStrategy(); // Или RewriteWriteStrategy
-    }
+      public static WriteStrategy createDefaultStrategy() {
+       return new AppendWriteStrategy();
+       }
 }

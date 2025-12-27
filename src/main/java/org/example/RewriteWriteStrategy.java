@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class RewriteWriteStrategy implements WriteStrategy{
     @Override
-    public void writeToFile(String filePath, CustomArrayList<Student> data) throws DataLoadingException {
+    public void writeToFile(String filePath, CustomArrayList<Student> data){
         if (data == null || data.isEmpty()) {
             System.out.println("Data is empty: " + filePath);
             return;
@@ -16,12 +16,7 @@ public class RewriteWriteStrategy implements WriteStrategy{
                 writer.write(student.toString() + '\n');
             }
         } catch (IOException e) {
-            throw new DataLoadingException("Incorrect data");
+            System.err.println("Error reading the file: " + e.getMessage());
         }
-    }
-
-    @Override
-    public String getSupportedExtension() {
-        return "";
     }
 }

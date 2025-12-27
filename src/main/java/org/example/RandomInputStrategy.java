@@ -16,7 +16,7 @@ public class RandomInputStrategy implements InputStrategy {
         this.countRandom = countRandom;
     }
     @Override
-    public CustomArrayList<Student> loadData(){
+    public CustomArrayList<Student> loadData() {
         return Stream.generate(() -> createRandomStudent())
                 .limit(countRandom)
                 .collect(Collectors.toCollection(CustomArrayList::new));

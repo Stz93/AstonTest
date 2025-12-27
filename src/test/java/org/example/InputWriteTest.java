@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MainTest {
+class InputWriteTest {
     final static Student.Builder builder = new Student.Builder();
 
     final static Student student1 = builder.name("Alex").averageGrade(0.91).recordBookNumber(100001).build();
@@ -39,8 +39,4 @@ class MainTest {
         }
     }
 
-    @Test
-    void write() {
-
-    }
 }

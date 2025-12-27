@@ -15,7 +15,7 @@ public class ManualInputStrategy implements InputStrategy{
         this.countManual = countManual;
     }
     @Override
-    public CustomArrayList<Student> loadData()  {
+    public CustomArrayList<Student> loadData() {
         return Stream.generate(()-> createStudent())
                 .limit(countManual)
                 .collect(Collectors.toCollection(CustomArrayList::new));

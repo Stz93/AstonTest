@@ -5,9 +5,9 @@ import java.io.IOException;
 
 public class AppendWriteStrategy implements WriteStrategy{
     @Override
-    public void writeToFile(String filePath, CustomArrayList<Student> data) throws DataLoadingException {
+    public void writeToFile(String filePath, CustomArrayList<Student> data) {
         if (data == null || data.isEmpty()) {
-            System.out.println("Нет данных для записи в файл: " + filePath);
+            System.out.println("There is no data to write to the file: " + filePath);
             return;
         }
         try(FileWriter writer = new FileWriter(filePath, true)){
@@ -16,12 +16,7 @@ public class AppendWriteStrategy implements WriteStrategy{
                 writer.write(student.toString() + '\n');
             }
         } catch (IOException e) {
-            throw new DataLoadingException("Incorrect data");
+            System.err.println("Error reading the file: " + e.getMessage());
         }
-    }
-
-    @Override
-    public String getSupportedExtension() {
-        return "";
     }
 }

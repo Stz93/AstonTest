@@ -13,14 +13,15 @@ public class FileInputStrategy implements InputStrategy {
     }
 
     @Override
-    public CustomArrayList<Student> loadData() throws DataLoadingException {
+    public CustomArrayList<Student> loadData() {
         try {
             return Files.lines(Paths.get(filePath))
                     .map(this::parseLine)
                     .filter(student -> student != null)
                     .collect(Collectors.toCollection(CustomArrayList::new));
         } catch (IOException e) {
-            throw new DataLoadingException("Cannot read file: " + filePath, e);
+            System.err.println("Error reading the file: " + e.getMessage());
+            return new CustomArrayList<>();
         }
     }
 
