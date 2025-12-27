@@ -31,19 +31,36 @@ public class ManualInputStrategy implements InputStrategy{
         String name = scannerManualInput.nextLine();
 
         System.out.println("Average grade: ");
-        String inputAverageGrade = scannerManualInput.nextLine();
-        try{
-            averageGrade = Double.parseDouble(inputAverageGrade);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        while (true) {
+            String inputAverageGrade = scannerManualInput.nextLine();
+            try {
+                averageGrade = Double.parseDouble(inputAverageGrade);
+                if (averageGrade >= 2.0 && averageGrade <= 5.0) {
+                    break;
+                } else {
+                    System.out.print("Grade must be between 2.0 and 5.0. Try again: ");
+                }
+            } catch (NumberFormatException e) {
+                System.out.print("It must be a number. Try again: ");
+            }
         }
 
         System.out.println("Number of record book: ");
-        String inputRecordBookNumber = scannerManualInput.nextLine();
-        try {
-            recordBookNumber = Integer.parseInt(inputRecordBookNumber);
-        } catch (NumberFormatException e) {
-            throw new RuntimeException(e);
+        while (true) {
+            String inputRecordBookNumber = scannerManualInput.nextLine();
+            try {
+                recordBookNumber = Integer.parseInt(inputRecordBookNumber);
+
+                if (inputRecordBookNumber.length() == 5 && recordBookNumber >= 10000 && recordBookNumber <= 99999) {
+                    break;
+                } else {
+                    System.out.print("Record book number must be exactly 5 digits. Try again: ");
+
+                }
+            } catch (NumberFormatException e) {
+                System.out.print("It must be a number. Try again: ");
+
+            }
         }
 
         return new Student.Builder()
