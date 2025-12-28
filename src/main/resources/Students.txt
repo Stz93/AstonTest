@@ -5,3 +5,4 @@
 	 name : Emily 	averageGrade : 0.95 	recordBookNumber : 100005
 	 name : Chloe 	averageGrade : 0.93 	recordBookNumber : 100003
 	 name : Freya 	averageGrade : 0.96 	recordBookNumber : 100006
+	 name : Bogdan 	averageGrade : 0.21 	recordBookNumber : 69645
