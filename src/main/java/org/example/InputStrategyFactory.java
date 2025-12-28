@@ -5,9 +5,6 @@ import java.util.Scanner;
 public class InputStrategyFactory {
     static Scanner scannerForInput = new Scanner(System.in);
     public static InputStrategy create(String inputCode){
-        if(!inputCode.matches("[1-4]")){
-            throw new IllegalArgumentException("Wrong action code. Choose 1-4 or 0");
-        }
         switch (inputCode){
             case "1":
                 System.out.println("You choose file");
@@ -32,7 +29,7 @@ public class InputStrategyFactory {
                 scannerForInput.nextLine();
                 return new ManualInputStrategy(countManual);
             default:
-                throw new IllegalArgumentException("Incorrect");
+                throw new IllegalStateException("Wrong action code. Choose 1-3.");
 
         }
     }

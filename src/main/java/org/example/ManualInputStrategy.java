@@ -30,7 +30,7 @@ public class ManualInputStrategy implements InputStrategy{
         System.out.println("Name: ");
         String name = scannerManualInput.nextLine();
 
-        System.out.println("Average grade: ");
+        System.out.println("Average grade (2.0 - 5.0): ");
         while (true) {
             String inputAverageGrade = scannerManualInput.nextLine();
             try {
@@ -45,7 +45,7 @@ public class ManualInputStrategy implements InputStrategy{
             }
         }
 
-        System.out.println("Number of record book: ");
+        System.out.println("Number of record book (5 numbs e.g 11111): ");
         while (true) {
             String inputRecordBookNumber = scannerManualInput.nextLine();
             try {
