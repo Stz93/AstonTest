@@ -139,8 +139,6 @@ public class Main {
      */
     static void write(final String writeCode, final List<Student> studentList) {
 
-
-        System.out.println("Writing to file");
         System.out.println("File: " + OUTPUT_PATH);
 
         if (studentList == null) {
@@ -155,6 +153,8 @@ public class Main {
 
         try {
             WriteStrategy strategy = WriteStrategyFactory.create(writeCode);
+
+            System.out.println("Writing to file");
 
             CustomArrayList<Student> customList = new CustomArrayList<>();
             for (Student student : studentList) {
